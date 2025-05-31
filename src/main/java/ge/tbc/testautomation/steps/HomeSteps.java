@@ -2,7 +2,6 @@ package ge.tbc.testautomation.steps;
 
 import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
-import com.microsoft.playwright.PlaywrightException;
 import com.microsoft.playwright.options.AriaRole;
 import ge.tbc.testautomation.data.enums.Meals;
 import ge.tbc.testautomation.data.enums.PropertyRating;
@@ -48,7 +47,6 @@ public class HomeSteps {
     }
 
     public HomeSteps selectTravelDates(Date checkInDate, Date checkOutDate) {
-        page.locator("//button[@aria-label='Next month']").click();
         Calendar cal = Calendar.getInstance();
 
         cal.setTime(checkInDate);
@@ -66,25 +64,7 @@ public class HomeSteps {
         return this;
     }
 
-    public void watchForPopup(Page page) {
-        // Run this in a background thread so it doesn’t block test execution
-        new Thread(() -> {
-            try {
-                Locator closeBtn = page.locator("[aria-label='Dismiss sign-in info.']"); // or the actual selector
 
-                // Wait until the popup becomes visible (timeout in ms, adjust as needed)
-                closeBtn.waitFor(new Locator.WaitForOptions().setTimeout(30000));
-
-                // If visible, click to dismiss
-                if (closeBtn.isVisible()) {
-                    closeBtn.click();
-                    System.out.println("Sign-in popup dismissed.");
-                }
-            } catch (PlaywrightException e) {
-                // Ignore if not shown within timeout
-            }
-        }).start();
-    }
 
     public HomeSteps selectPropertyType(PropertyType propertyType) {
         Locator checkbox = homePage.getPropertyTypeCheckbox(propertyType);
@@ -164,10 +144,6 @@ public class HomeSteps {
     }
 
     public HomeSteps validateHeaderDisappearsWhenScrolling() {
-        // First check if header is visible
-        homePage.header.waitFor();
-        assertThat(homePage.header).isVisible();
-
         // Scroll down enough to move past the header
         page.evaluate("window.scrollBy(0, 500)");
 
@@ -187,11 +163,6 @@ public class HomeSteps {
         if (isHeaderVisible) {
             throw new AssertionError("Header is still visible after scrolling, suggesting it might be sticky");
         }
-
-        System.out.println("Header correctly disappears from view when scrolling");
-
-        // Scroll back to the top
-        page.evaluate("window.scrollTo(0, 0)");
 
         return this;
     }

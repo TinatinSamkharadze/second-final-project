@@ -27,7 +27,7 @@ public class HomePage {
         this.listBox = page.getByRole(AriaRole.LISTBOX).first();
         this.navBar = page.locator(".c4a6e8e871").first();
         this.hamburgerMenu = page.locator(".fc70cba028.e2a1cd6bfe").first();
-        this.footerLinks = page.locator("//ul[@class='footer-top-links-list']/li");
+        this.footerLinks = page.locator(".b08850ce41.f546354b44.cc045b173b");
         this.header = page.locator(".Header_main");
     }
 

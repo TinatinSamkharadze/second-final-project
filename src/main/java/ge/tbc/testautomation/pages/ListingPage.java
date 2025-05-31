@@ -4,7 +4,7 @@ import com.microsoft.playwright.Locator;
 import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.AriaRole;
 
-public class SearchResultsPage {
+public class ListingPage {
 
     public Locator propertyCards,
     searchHeader,
@@ -13,7 +13,7 @@ public class SearchResultsPage {
     sortButton,
     propertyRating,
     propertyCardTitle;
-    public SearchResultsPage(Page page)
+    public ListingPage(Page page)
     {
         this.propertyCards = page.locator("//div[@data-testid='property-card']");
         this.searchHeader = page.locator(".b87c397a13.cacb5ff522");

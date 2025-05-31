@@ -3,7 +3,7 @@ package ge.tbc.testautomation;
 import com.microsoft.playwright.*;
 import ge.tbc.testautomation.steps.DetailsSteps;
 import ge.tbc.testautomation.steps.HomeSteps;
-import ge.tbc.testautomation.steps.SearchResultsSteps;
+import ge.tbc.testautomation.steps.ListingSteps;
 import org.testng.annotations.*;
 
 import java.util.Arrays;
@@ -16,7 +16,7 @@ public class BaseTest {
     public BrowserContext browserContext;
     public Page page;
     public HomeSteps homeSteps;
-    public SearchResultsSteps searchResultsSteps;
+    public ListingSteps listingSteps;
     public DetailsSteps detailsSteps;
 
 
@@ -46,7 +46,7 @@ public class BaseTest {
     public void resetContext() {
         page.navigate(BOOKING_BASE_URL);
         this.homeSteps = new HomeSteps(page);
-        this.searchResultsSteps = new SearchResultsSteps(page);
+        this.listingSteps = new ListingSteps(page);
         this.detailsSteps = new DetailsSteps(page);
     }
 

@@ -5,30 +5,30 @@ import com.microsoft.playwright.Page;
 import com.microsoft.playwright.options.WaitForSelectorState;
 import ge.tbc.testautomation.data.enums.PropertyRating;
 import ge.tbc.testautomation.data.enums.PropertyType;
-import ge.tbc.testautomation.pages.SearchResultsPage;
+import ge.tbc.testautomation.pages.ListingPage;
 
 import java.util.List;
 import java.util.Map;
 
 import static com.microsoft.playwright.assertions.PlaywrightAssertions.assertThat;
 
-public class SearchResultsSteps {
+public class ListingSteps {
     Page page;
-    SearchResultsPage searchResultsPage;
+    ListingPage listingPage;
 
-    public SearchResultsSteps(Page page) {
+    public ListingSteps(Page page) {
         this.page = page;
-        searchResultsPage = new SearchResultsPage(page);
+        listingPage = new ListingPage(page);
     }
 
-    public SearchResultsSteps validateResultsAppear()
+    public ListingSteps validateResultsAppear()
     {
-        searchResultsPage.propertyCards.first().isVisible();
+        listingPage.propertyCards.first().isVisible();
         return this;
     }
 
-    public SearchResultsPage scrollThroughResults() {
-        Locator results = searchResultsPage.propertyCards;
+    public ListingPage scrollThroughResults() {
+        Locator results = listingPage.propertyCards;
         results.first().waitFor();
 
         int count = results.count();
@@ -37,30 +37,30 @@ public class SearchResultsSteps {
                 Locator result = results.nth(i);
                 result.scrollIntoViewIfNeeded();
         }
-        return searchResultsPage;
+        return listingPage;
     }
 
-    public SearchResultsSteps validateSearchHeaderContainsCorrectText(String searchText) {
-        searchResultsPage.searchHeader
+    public ListingSteps validateSearchHeaderContainsCorrectText(String searchText) {
+        listingPage.searchHeader
                 .waitFor(new Locator.WaitForOptions().setState(WaitForSelectorState.VISIBLE));
-        assertThat(searchResultsPage.searchHeader).containsText(searchText);
+        assertThat(listingPage.searchHeader).containsText(searchText);
 
         return this;
     }
 
 
 
-    public  SearchResultsSteps clickEnterKey()
+    public ListingSteps clickEnterKey()
     {
         page.keyboard().press("Enter");
         return this;
     }
 
-    public SearchResultsSteps validateAlertWindowToAppear()
+    public ListingSteps validateAlertWindowToAppear()
     {
         try {
-            searchResultsPage.alert.waitFor(new Locator.WaitForOptions().setTimeout(5000)); // 5 seconds timeout
-            if(searchResultsPage.alert.isVisible()) {
+            listingPage.alert.waitFor(new Locator.WaitForOptions().setTimeout(5000)); // 5 seconds timeout
+            if(listingPage.alert.isVisible()) {
                 clickEnterKey();
             }
         } catch (Exception e) {
@@ -70,15 +70,15 @@ public class SearchResultsSteps {
         return this;
     }
 
-    public SearchResultsSteps clickDismissButton()
+    public ListingSteps clickDismissButton()
     {
-        searchResultsPage.dismissButton.waitFor();
-        searchResultsPage.dismissButton.click();
+        listingPage.dismissButton.waitFor();
+        listingPage.dismissButton.click();
         return this;
     }
 
-    public SearchResultsSteps validateResults(String searchText) {
-        Locator propertyCards = searchResultsPage.propertyCards;
+    public ListingSteps validateResults(String searchText) {
+        Locator propertyCards = listingPage.propertyCards;
 
         int count = propertyCards.count();
         for (int i = 0; i < count; i++) {
@@ -90,8 +90,8 @@ public class SearchResultsSteps {
         return this;
     }
 
-    public SearchResultsSteps validateResultsAfterApplyingRating(PropertyRating propertyRating) {
-        Locator propertyCards = searchResultsPage.propertyCards;
+    public ListingSteps validateResultsAfterApplyingRating(PropertyRating propertyRating) {
+        Locator propertyCards = listingPage.propertyCards;
 
         int count = propertyCards.count();
         for (int i = 0; i < count; i++) {
@@ -102,8 +102,8 @@ public class SearchResultsSteps {
 
         return this;
     }
-    public SearchResultsSteps validateResultsAfterApplyingPropertyType(PropertyType propertyType) {
-        Locator propertyCards = searchResultsPage.propertyCards;
+    public ListingSteps validateResultsAfterApplyingPropertyType(PropertyType propertyType) {
+        Locator propertyCards = listingPage.propertyCards;
 
         int count = propertyCards.count();
         for (int i = 0; i < count; i++) {
@@ -115,25 +115,25 @@ public class SearchResultsSteps {
         return this;
     }
 
-    public SearchResultsSteps clickSortButton()
+    public ListingSteps clickSortButton()
     {
-        searchResultsPage.sortButton.waitFor();
-        searchResultsPage.sortButton.click();
+        listingPage.sortButton.waitFor();
+        listingPage.sortButton.click();
         return this;
     }
 
-    public SearchResultsSteps clickOnPropertyRatingHighToLow()
+    public ListingSteps clickOnPropertyRatingHighToLow()
     {
-        searchResultsPage.propertyRating.waitFor();
-        searchResultsPage.propertyRating.click();
+        listingPage.propertyRating.waitFor();
+        listingPage.propertyRating.click();
         return this;
     }
 
-    public SearchResultsSteps validatePropertyCardsAreCorrectlyFiltered() {
-        searchResultsPage.propertyCards.first().waitFor();
+    public ListingSteps validatePropertyCardsAreCorrectlyFiltered() {
+        listingPage.propertyCards.first().waitFor();
 
         // Get all property cards
-        Locator propertyCards = searchResultsPage.propertyCards;
+        Locator propertyCards = listingPage.propertyCards;
         int count = propertyCards.count();
 
         for (int i = 0; i < count; i++) {
@@ -157,25 +157,25 @@ public class SearchResultsSteps {
         return this;
     }
 
-    public SearchResultsSteps goToDetailsPage()
+    public ListingSteps goToDetailsPage()
     {
-        searchResultsPage.propertyCardTitle.click();
+        listingPage.propertyCardTitle.click();
         return this;
     }
 
-    public SearchResultsSteps validateStarRating(int expectedStars) {
-        Locator starElements =  searchResultsPage.propertyCards.first().locator("span.fc70cba028.bdc459fcb4.f24706dc71");
+    public ListingSteps validateStarRating(int expectedStars) {
+        Locator starElements =  listingPage.propertyCards.first().locator("span.fc70cba028.bdc459fcb4.f24706dc71");
 
         assertThat(starElements).hasCount(expectedStars);
 
         return this;
     }
 
-    public SearchResultsSteps validatePropertyCardsGridLayout(int expectedPerRow) {
+    public ListingSteps validatePropertyCardsGridLayout(int expectedPerRow) {
         // Wait for property cards to be visible
-        searchResultsPage.propertyCards.first().waitFor();
+        listingPage.propertyCards.first().waitFor();
 
-        int count = searchResultsPage.propertyCards.count();
+        int count = listingPage.propertyCards.count();
         if (count == 0) {
             throw new AssertionError("No property cards found on the page");
         }

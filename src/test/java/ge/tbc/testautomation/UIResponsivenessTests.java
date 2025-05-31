@@ -20,7 +20,7 @@ public class UIResponsivenessTests extends BaseTest{
                 .clickSearchButton()
                 .validateHamburgerMenuIsNotVisible()
                 .validateHeaderDisappearsWhenScrolling();
-        searchResultsSteps
+        listingSteps
                 .validatePropertyCardsGridLayout(1);
     }
 
@@ -37,7 +37,7 @@ public class UIResponsivenessTests extends BaseTest{
                 .validateHamburgerMenuIsVisible()
                 .validateFooterLinksAreHorizontal()
                 .validateHeaderDisappearsWhenScrolling();
-        searchResultsSteps
+        listingSteps
                 .validatePropertyCardsGridLayout(1);
     }
 
@@ -54,7 +54,7 @@ public class UIResponsivenessTests extends BaseTest{
                 .validateHamburgerMenuIsVisible()
                 .validateFooterLinksAreHorizontal()
                 .validateHeaderDisappearsWhenScrolling();
-        searchResultsSteps
+        listingSteps
                 .validatePropertyCardsGridLayout(1);
     }
 }

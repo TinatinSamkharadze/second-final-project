@@ -15,13 +15,13 @@ public class CoreFunctionalityTests extends BaseTest{
                   .searchLocation(bookingCase.getDestination())
                   .selectLocationOption(bookingCase.getDestination())
                   .clickSearchButton();
-          searchResultsSteps
+          listingSteps
                   .validateAlertWindowToAppear();
-          searchResultsSteps
+          listingSteps
                   .validateResultsAppear();
           homeSteps
                   .clickOnCalendar();
-          searchResultsSteps
+          listingSteps
                   .validateSearchHeaderContainsCorrectText(bookingCase.getDestination())
                   .validateResults(bookingCase.getDestination());
     }
@@ -46,7 +46,7 @@ public class CoreFunctionalityTests extends BaseTest{
                 .waitForLoadState()
                 .selectPropertyType(PropertyType.VILLAS)
                 .selectPropertyRating(PropertyRating.FIVE_STARS);
-        searchResultsSteps
+        listingSteps
                 .validateResultsAfterApplyingPropertyType(PropertyType.VILLAS)
                 .validateResultsAfterApplyingRating(PropertyRating.FIVE_STARS);
     }
@@ -59,7 +59,7 @@ public class CoreFunctionalityTests extends BaseTest{
                 .selectLocationOption(bookingCase.getDestination())
                 .selectTravelDates(bookingCase.getCheckIn(), bookingCase.getCheckOut())
                 .clickSearchButton();
-        searchResultsSteps
+        listingSteps
                 .clickSortButton()
                 .clickOnPropertyRatingHighToLow()
                 .validateResultsAppear()
@@ -76,7 +76,7 @@ public class CoreFunctionalityTests extends BaseTest{
                 .waitForLoadState()
                 .selectPropertyType(PropertyType.HOTELS)
                 .selectPropertyRating(PropertyRating.FIVE_STARS);
-        searchResultsSteps
+        listingSteps
                 .validateResultsAfterApplyingPropertyType(PropertyType.HOTELS)
                 .validateStarRating(5)
                 .goToDetailsPage();
